@@ -4,15 +4,15 @@ using System.Xml;
 namespace HelloWorld { 
 class Program { 
     static void Main(){ 
-    (string[] ColourInput, string[] hints)[]UserInput = new (string[], string[])[11];
+    (string[] ColourInput, string[] hints)[]UserInput = new (string[], string[])[12];
     int Turns = 1;
     //Generating the correct answer
     string[]CorrectAns = GenAns();
-    while (Turns < 13){
+    while (Turns < UserInput.Length){
         string[] colours = UserInput[Turns].ColourInput;
         string[] hints = UserInput[Turns].hints;
         colours = InputAns();
-        //CurrentPos(UserInput,Turns);
+        CurrentPos(UserInput);
         hints = ProcessAns(UserInput,CorrectAns,Turns);
         Console.WriteLine(Match(hints));
         Turns++;
@@ -20,8 +20,8 @@ class Program {
 }
 
 static string[] InputAns(){
-    string[] ans = new string[3];
-    for (int i = 0; i < 3; i++){
+    string[] ans = new string[4];
+    for (int i = 0; i < 4; i++){
         Console.Write($"Enter the {i+1} guess");
         ans[i] = Console.ReadLine();
     }
@@ -56,11 +56,13 @@ static string[] ProcessAns((string[] ColourInput, string[] hints)[]UserInput, st
     return hints;
     }
 
-static string CurrentPos((string[] ColourInput, string[] hints)[]UserInput, int Turns){
-    for (int i = 0; i < Turns; i++){
-        
+static void CurrentPos((string[] ColourInput, string[] hints)[]UserInput){
+    for (int i = 0; i < UserInput.Length; i++){
+        Console.Write($"{i+1}");
+        for (int j = 0; j < hints.Length;j++){
+            Console.Write("|" + hints[j] + "|");
+        }
     }
-    return;
 }
 
 static string Match(string[] hints){
